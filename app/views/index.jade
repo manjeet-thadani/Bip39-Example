@@ -1,0 +1,133 @@
+
+doctype html
+html
+  head
+    title Mnemonic Code Converter
+    meta(id="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/stylesheets/style.css")
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
+    script(src="/javascripts/script.js")
+
+  body
+    #title Mnemonic Code Converter
+    hr
+
+    table
+      tr
+        td.left
+          p(style="font-size: 28px; text-align:right;") Mnemonic
+        td.right   
+
+      tr
+        td.left
+        td.right
+          p(style="font-size: 16px; ") You can enter an existing BIP39 mnemonic, or generate a new random one. Typing your own twelve words will probably not work how you expect, since the words require a particular structure (the last word is a checksum).
+            br
+            br
+            p Select Entropy Length: &nbsp
+              select(id="entropy_length")
+                option(value="128") 128 bits (12 words)
+                option(value="160") 160 bits (15 words)
+                option(value="192") 192 bits (18 words)
+                option(value="224") 224 bits (21 words)
+                option(value="256") 256 bits (24 words)
+        
+      tr
+        td.left
+          p(style="width: 100%; text-align:right; font-weight:bold") Mnemonic Words (optional) 
+        td.right
+          textarea.big(id="bip39_mnemonics", cols="10", rows="2")
+          .error#error_bip39_mnemonics
+
+      tr
+        td.left
+          p(style="width: 100%; text-align:right; font-weight:bold") Passphrase (optional) 
+        td.right
+          textarea.big(id="bip39_passphrase", cols="10", rows="2")
+          .error#bip39_passphrase
+      
+      tr
+        td.left
+          p(style="width: 100%; text-align:right; font-weight:bold") BIP39 Seed
+        td.right
+          textarea.big.disabled(id="bip39_seed", cols="10", rows="2" disabled)
+      
+      tr
+        td.left
+          p(style="width: 100%; text-align:right; font-weight:bold") Entropy
+        td.right
+          textarea.big.disabled(id="bip39_entropy", cols="10", rows="2")
+      
+      tr
+        td.left
+          p(style="width: 100%; text-align:right; font-weight:bold") BIP39 Root Key xprv
+        td.right
+          textarea.big.disabled(id="bip39_root_key_xprv", cols="10", rows="2" disabled)
+    
+      tr
+        td.left
+          p(style="width: 100%; text-align:right; font-weight:bold") BIP39 Root Key xpub
+        td.right
+          textarea.big.disabled(id="bip39_root_key_xpub", cols="10", rows="2" disabled)
+      
+      tr
+        td.left
+        td.right
+          button(onclick="generateBIP39()" class="btn btn-primary") Generate
+      
+    hr
+
+    table
+      tr
+        td.left
+          p(style="font-size: 28px; text-align:right;") Deviation Path
+        td.right 
+      
+      tr
+        td.left
+          p(style="width: 100%; text-align:right; font-weight:bold") Purpose
+        td.right
+          textarea.big.disabled(id="bip44_pupose", cols="10", rows="1" disabled) 44
+      
+      tr
+        td.left
+          p(style="width: 100%; text-align:right; font-weight:bold") Coin
+        td.right
+          select(id="coin_type" style="width : 100%;")
+            option(value="60") ETH - Ethereum
+      
+      tr
+        td.left
+          p(style="width: 100%; text-align:right; font-weight:bold") Account
+        td.right
+          textarea.big(id="bip44_account", cols="10", rows="1") 0
+      
+       tr
+        td.left
+          p(style="width: 100%; text-align:right; font-weight:bold") External / Internal
+        td.right
+          textarea.big(id="bip44_change", cols="10", rows="1") 0
+      
+      tr
+        td.left
+          p(style="width: 100%; text-align:right; font-weight:bold") Account Extended Private Key
+        td.right
+          textarea.big.disabled(id="bip44_account_xprv", cols="10", rows="2" disabled)
+      
+      tr
+        td.left
+          p(style="width: 100%; text-align:right; font-weight:bold") Account Extended Public Key
+        td.right
+          textarea.big.disabled(id="bip44_account_xpub", cols="10", rows="2" disabled)
+
+
+      
+
+          
+          
+
+
+
