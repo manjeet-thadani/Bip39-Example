@@ -5,7 +5,7 @@ function generateBIP39() {
 
   $.ajax({
     type: "POST",
-    url: "/generate/bip-39",
+    url: "/generate/seeds",
     data: {
       entropy_length: entropy_length,
       bip39_mnemonics: bip39_mnemonics,
@@ -27,6 +27,48 @@ function generateBIP39() {
   });
 }
 
+function generateAddresses() {
+  var seed = $("#bip39_seed").val();
+  var purpose = $("#bip44_pupose").val();
+  var coin_type = $("#coin_type").val();
+  var account = $("#bip44_account").val();
+  var change = $("#bip44_change").val();
+
+  var account_deviation_path =
+    "m/" + purpose + "'/" + coin_type + "'/" + account + "'";
+  var change_deviation_path = account_deviation_path + "/" + change;
+
+  $.ajax({
+    type: "POST",
+    url: "/generate/addresses",
+    data: {
+      seed: seed,
+      account_deviation_path: account_deviation_path,
+      change_deviation_path: change_deviation_path
+    },
+    success: function(data) {
+      $("#bip44_account_xprv").val(data.account_node_xprv);
+      $("#bip44_account_xpub").val(data.account_node_xpub);
+      $("#bip32_account_xprv").val(data.change_node_xprv);
+      $("#bip32_account_xpub").val(data.change_node_xpub);
+
+      var addresses_table =
+        "<table id=addresses> <thead> <tr> <td> Path </td><td> Public Key </td><td> Private Key </td> </tr> </thead> <tbody>";
+      $.each(data.addresses, function() {
+        addresses_table += "<tr>";
+        addresses_table += "<td>" + this.address_index_deviation_path + "</td>";
+        addresses_table += "<td>" + this.public_key + "</td>";
+        addresses_table += "<td>" + this.private_key + "</td>";
+        addresses_table += "</tr>";
+      });
+
+      addresses_table += "</body> </table>";
+
+      $("#address_index").html(addresses_table);
+    }
+  });
+}
+
 function clear() {
   $("#bip39_mnemonics").val("");
   $("#bip39_seed").val("");
@@ -34,31 +76,17 @@ function clear() {
   $("#bip39_root_key_xprv").val("");
   $("#bip39_root_key_xpub").val("");
 
+  $("#bip44_account").val("0");
+  $("#bip44_change").val("0");
+  $("#bip44_account_xprv").val("");
+  $("#bip44_account_xpub").val("");
+  $("#bip32_account_xprv").val("");
+  $("#bip32_account_xpub").val("");
+
   $("#error_bip39_mnemonics").html("");
+  $("#address_index").html("");
 }
 
-$("h2").delegate(".remove_product_form", "submit", function(event) {
-  event.preventDefault();
-});
-
-$("h2").delegate(".update_quantity_form", "submit", function(event) {
-  event.preventDefault();
-  $.ajax({
-    type: "PUT",
-    url: $(this).attr("action"),
-    data: $(this).serialize(),
-    success: function(data) {
-      populateCart(data);
-      populateCartCount();
-    }
-  });
-});
-
-function populateCartCount() {
-  $.getJSON("/cart/count", function(data) {
-    $("#cart_count").text(data.count);
-  });
-}
 function populateCart(data) {
   var cartInfo = '<h5 id="error"> ' + data.error + "</h5>";
 

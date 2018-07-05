@@ -97,6 +97,7 @@ html
           p(style="width: 100%; text-align:right; font-weight:bold") Coin
         td.right
           select(id="coin_type" style="width : 100%;")
+            option(value="0") BTC - Bitcoin
             option(value="60") ETH - Ethereum
       
       tr
@@ -122,6 +123,33 @@ html
           p(style="width: 100%; text-align:right; font-weight:bold") Account Extended Public Key
         td.right
           textarea.big.disabled(id="bip44_account_xpub", cols="10", rows="2" disabled)
+
+       tr
+        td.left
+        td.right
+          p(style="font-size: 16px; ") The BIP32 derivation path and extended keys are the basis for the derived addresses.
+      
+      tr
+        td.left
+          p(style="width: 100%; text-align:right; font-weight:bold") BIP32 Extended Private Key
+
+        td.right
+          textarea.big.disabled(id="bip32_account_xprv", cols="10", rows="2" disabled)
+      
+      tr
+        td.left
+          p(style="width: 100%; text-align:right; font-weight:bold") BIP32 Extended Public Key
+        td.right
+          textarea.big.disabled(id="bip32_account_xpub", cols="10", rows="2" disabled)
+      
+      tr
+        td.left
+        td.right
+          button(onclick="generateAddresses()" class="btn btn-primary") Generate
+
+    hr
+
+    h4#address_index
 
 
       

@@ -57,3 +57,22 @@ button {
   font-size: 12px;
   color: red;
 }
+thead {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+tbody tr td {
+  padding: 10px 15px 10px 15px;
+}
+
+#addresses {
+  border: 1px solid #ddd;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#addresses tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
