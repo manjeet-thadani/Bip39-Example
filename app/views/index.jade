@@ -9,9 +9,10 @@ html
 
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
-    script(src="/javascripts/script.js")
+    
 
   body
+    #error vfbdf
     #title Mnemonic Code Converter
     hr
 
@@ -34,13 +35,14 @@ html
                 option(value="192") 192 bits (18 words)
                 option(value="224") 224 bits (21 words)
                 option(value="256") 256 bits (24 words)
+              | &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp OR
+              button(onclick="generateMnemonic()" class="btn btn-primary" style="margin-left: 40px; width: 100px;") Generate
         
       tr
         td.left
           p(style="width: 100%; text-align:right; font-weight:bold") Mnemonic Words (optional) 
         td.right
           textarea.big(id="bip39_mnemonics", cols="10", rows="2")
-          .error#error_bip39_mnemonics
 
       tr
         td.left
@@ -48,6 +50,14 @@ html
         td.right
           textarea.big(id="bip39_passphrase", cols="10", rows="2")
           .error#bip39_passphrase
+      
+      tr
+        td.left
+          p(style="width: 100%; text-align:right; font-weight:bold") Coin
+        td.right
+          select(id="coin_type" style="width : 100%;")
+            option(value="0") BTC - Bitcoin
+            option(value="60") ETH - Ethereum
       
       tr
         td.left
@@ -73,11 +83,6 @@ html
         td.right
           textarea.big.disabled(id="bip39_root_key_xpub", cols="10", rows="2" disabled)
       
-      tr
-        td.left
-        td.right
-          button(onclick="generateBIP39()" class="btn btn-primary") Generate
-      
     hr
 
     table
@@ -91,14 +96,6 @@ html
           p(style="width: 100%; text-align:right; font-weight:bold") Purpose
         td.right
           textarea.big.disabled(id="bip44_pupose", cols="10", rows="1" disabled) 44
-      
-      tr
-        td.left
-          p(style="width: 100%; text-align:right; font-weight:bold") Coin
-        td.right
-          select(id="coin_type" style="width : 100%;")
-            option(value="0") BTC - Bitcoin
-            option(value="60") ETH - Ethereum
       
       tr
         td.left
@@ -128,7 +125,13 @@ html
         td.left
         td.right
           p(style="font-size: 16px; ") The BIP32 derivation path and extended keys are the basis for the derived addresses.
-      
+      tr
+        td.left
+          p(style="width: 100%; text-align:right; font-weight:bold") BIP32 Derivation Path
+
+        td.right
+          textarea.big.disabled(id="bip32_derivation_path", cols="10", rows="1" disabled) m/44'/0'/0'/0
+
       tr
         td.left
           p(style="width: 100%; text-align:right; font-weight:bold") BIP32 Extended Private Key
@@ -141,15 +144,12 @@ html
           p(style="width: 100%; text-align:right; font-weight:bold") BIP32 Extended Public Key
         td.right
           textarea.big.disabled(id="bip32_account_xpub", cols="10", rows="2" disabled)
-      
-      tr
-        td.left
-        td.right
-          button(onclick="generateAddresses()" class="btn btn-primary") Generate
 
     hr
 
     h4#address_index
+
+    script(src="/javascripts/script.js")
 
 
       

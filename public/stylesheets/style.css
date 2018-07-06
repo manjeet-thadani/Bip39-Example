@@ -63,16 +63,32 @@ thead {
   text-align: center;
 }
 
-tbody tr td {
+tbody tr td,
+thead tr td {
   padding: 10px 15px 10px 15px;
 }
 
 #addresses {
   border: 1px solid #ddd;
   border-collapse: collapse;
+  font-size: 14px;
   width: 100%;
 }
 
 #addresses tr:nth-child(even) {
   background-color: #f2f2f2;
+}
+
+#error {
+  position: fixed;
+  bottom: 0;
+  padding: 16px;
+  font-size: 22px;
+  color: red;
+  text-align: center;
+  width: 90%;
+  visibility: hidden;
+  background-color: #ffa130;
+  border-radius: 15px 15px 0px 0px;
+  border: 2px solid black;
 }
